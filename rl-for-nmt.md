@@ -9,6 +9,13 @@ Recent studies have shown that reinforcement learning is an effective approach f
 ### Motivation to use RL in NMT
 In usual training setup for NMT task, we optimize maximum likelihood of each produced token, but during inference we want to get realistic sentences, not single tokens. Using RL we can directly optimize evaluation metric (BLEU) which measures similarity between whole sentences instead of maximum likelihood for single tokens.
 
+### MLE and RL Objective in NMT
+#### MLE Objective
+<img src="https://i.imgur.com/iby2SSw.png">
+
+#### RL Objective
+<img src="https://i.imgur.com/iBEz5RQ.png">
+
 ### Investigated methods
 #### Sample generating
 Two strategies are considered:
@@ -18,7 +25,7 @@ Two strategies are considered:
 #### Reward computation
 There can be 2 main methods for reward calculation in NMT task:
 1. Terminal: reward (BLEU with correct translation) is calculated when whole sentence in translated. This can lead to problems due to the sparsity of rewards.
-2. Reward shaping: terminal reward is replaced by the sequence of intermediate rewards which is calculated as difference in partial BLEU: <insert pic>
+2. Reward shaping: terminal reward is replaced by the sequence of intermediate rewards which is calculated as difference in partial BLEU: <img src="https://i.imgur.com/0JDfXz7.png" height="25">. It is verified that using the shaped reward instead of awarding the whole score does not change the optimal policy.
   
 #### Variance reduction
 Authors use REINFORCE algorithm for gradient estimation. They investigated two version of it:
@@ -26,7 +33,7 @@ Authors use REINFORCE algorithm for gradient estimation. They investigated two v
 2. REINFORCE with baseline
 
 #### Combine MLE and RL Objectives
-We can combine MLE and RL objectives linearly as follows: <insert pic>
+We can combine MLE and RL objectives linearly as follows: <img src="https://i.imgur.com/HDV0XC5.png" height="30">
   
 #### Leveraging monolingual data
 Monolingual data has been proved to be able to significantly improve the performance of NMT systems. There can be few options of how to use it in RL training:
@@ -48,4 +55,8 @@ For target-side monolingual data authors get pseudo source via back translation.
 4. Leveraging the monolingual data can significantly improve quality of RL training
 
 #### Tables
-<a lot of pics>
+<img src="https://i.imgur.com/zgWSZYG.png" width="400"> <img src="https://i.imgur.com/yvqv4zX.png" width="400">
+<img src="https://i.imgur.com/PSpbqWi.png" width="400"> <img src="https://i.imgur.com/PmyHBNe.png" width="400">
+<img src="https://i.imgur.com/pnfvimb.png" width="400"> <img src="https://i.imgur.com/xUxFk71.png" width="400">
+<img src="https://i.imgur.com/CQs9QaL.png" width="400"> 
+<img src="https://i.imgur.com/pP7da3H.png">
